@@ -1,6 +1,6 @@
 # inlets-demo-gcp
 
-Expose nginx server running in Kubernetes to GCP using [inlets.dev](https://inlets.dev/)
+Exposes an nginx server running in your private Kubernetes cluster (e.g using Docker Desktop) to Google Cloud Platform using [inlets.dev](https://inlets.dev/)
 
 ## Getting started
 
@@ -18,11 +18,13 @@ curl -sLSf https://inletsctl.inlets.dev | sudo sh
 sudo inletsctl download --pro
 ```
 
+Configure the required permissions in your Google Cloud project:
+
 ```cli
 ./setup-gcp.sh
 ```
 
-Provision a VM in Google Cloud Platform:
+Provision a VM in Google Cloud Platform using `inlestctl`:
 
 ```cli
 inletsctl create \
@@ -33,7 +35,7 @@ inletsctl create \
 
 ![gcp-exit-node](docs/images/gcp-exit-node.PNG)
 
-Install the operator and specify the path for the GCP access token:
+Install the `inlets-operator` and specify the path for the GCP access token:
 
 ```cli
 arkade install inlets-operator \
@@ -44,14 +46,14 @@ arkade install inlets-operator \
     --license $(cat ./inlets-pro-license.txt)
 ```
 
-Deploy the nginx workload:
+Deploy the nginx workload to your private Kubernetes cluster:
 
 ```cli
 kubectl apply -f \
  https://raw.githubusercontent.com/inlets/inlets-operator/master/contrib/nginx-sample-deployment.yaml
 ```
 
-Expose it with a `LoadBalancer` from Google Cloud Platform:
+Finally, expose it with a `LoadBalancer` from Google Cloud Platform:
 
 ```cli
 kubectl expose deployment nginx-1 --port=80 --type=LoadBalancer
@@ -60,6 +62,8 @@ kubectl expose deployment nginx-1 --port=80 --type=LoadBalancer
 ![k9s](docs/images/k9s.PNG)
 
 ## Clean up
+
+Remove the VM that was created with `inletsctl`:
 
 ```cli
 inletsctl delete --provider gce \
