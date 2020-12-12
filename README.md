@@ -1,5 +1,7 @@
 # inlets-demo-gcp
 
+Expose nginx server running in Kubernetes to GCP using [inlets.dev](https://inlets.dev/)
+
 ## Getting started
 
 Getting `arkade`:
