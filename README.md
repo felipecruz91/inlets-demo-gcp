@@ -31,7 +31,7 @@ inletsctl create \
   --access-token-file key.json
 ```
 
-![gcp-exit-node-01](docs/images/gcp-exit-node-01.PNG)
+![gcp-exit-node](docs/images/gcp-exit-node.PNG)
 
 Install the operator and specify the path for the GCP access token:
 
@@ -56,8 +56,6 @@ Expose it with a `LoadBalancer` from Google Cloud Platform:
 ```cli
 kubectl expose deployment nginx-1 --port=80 --type=LoadBalancer
 ```
-
-![gcp-exit-node-01](docs/images/gcp-exit-node-01.PNG)
 
 ![k9s](docs/images/k9s.PNG)
 
