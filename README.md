@@ -1,6 +1,6 @@
 # inlets-demo-gcp
 
-Exposes an nginx server running in your private Kubernetes cluster (e.g using Docker Desktop) to Google Cloud Platform using [inlets.dev](https://inlets.dev/)
+Exposes an nginx server running in your private Kubernetes cluster (e.g using Docker Desktop in your local laptop) to Google Cloud Platform using [inlets.dev](https://inlets.dev/)
 
 ## Getting started
 
