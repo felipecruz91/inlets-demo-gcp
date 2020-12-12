@@ -19,8 +19,10 @@ sudo inletsctl download --pro
 ```
 
 ```cli
-./create-gcp-exit-node.sh
+./setup-gcp.sh
 ```
+
+Provision a VM in Google Cloud Platform:
 
 ```cli
 inletsctl create \
@@ -29,7 +31,9 @@ inletsctl create \
   --access-token-file key.json
 ```
 
-![gcp-exit-node-0](docs/images/gcp-exit-node-0.PNG)
+![gcp-exit-node-01](docs/images/gcp-exit-node-01.PNG)
+
+Install the operator and specify the path for the GCP access token:
 
 ```cli
 arkade install inlets-operator \
@@ -40,14 +44,22 @@ arkade install inlets-operator \
     --license $(cat ./inlets-pro-license.txt)
 ```
 
+Deploy the nginx workload:
+
 ```cli
 kubectl apply -f \
  https://raw.githubusercontent.com/inlets/inlets-operator/master/contrib/nginx-sample-deployment.yaml
 ```
 
+Expose it with a `LoadBalancer` from Google Cloud Platform:
+
 ```cli
 kubectl expose deployment nginx-1 --port=80 --type=LoadBalancer
 ```
+
+![gcp-exit-node-01](docs/images/gcp-exit-node-01.PNG)
+
+![k9s](docs/images/k9s.PNG)
 
 ## Clean up
 
@@ -57,7 +69,7 @@ inletsctl delete --provider gce \
     --access-token-file key.json
 ```
 
-References:
+## References:
 
 - https://blog.alexellis.io/get-private-kubectl-access-anywhere/
 - https://blog.alexellis.io/ingress-for-your-local-kubernetes-cluster/
